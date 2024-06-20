@@ -73,6 +73,17 @@ function toggleClass() {
   isRed.value = !isRed.value
   isBgBlue.value = !isBgBlue.value
 }
+
+const ok = ref(true)
+const maybeOk = ref(true)
+
+const fruits = ref(['apple', 'banana', 'orange'])
+
+const user = ref({
+  name: 'John',
+  age: 30,
+  gender: 'male'
+})
 </script>
 
 <template>
@@ -113,6 +124,24 @@ function toggleClass() {
   <p>{{ score }}</p>
   <button @click="score++">score +1</button>
   <button @click="toggleClass">toggleClass</button>
+
+  <p v-if="ok">OK</p>
+  <p v-else-if="maybeOk">MAYBE OK</p>
+  <p v-else>NOT OK</p>
+  <template v-if="ok">
+    <p>OK</p>
+    <p>Hi</p>
+    <p>Hello</p>
+  </template>
+  <p v-show="ok">OK</p>
+  <button @click="ok = !ok">toggle</button>
+
+  <li v-for="(fruit, index) in fruits" :key="fruit">{{ fruit }}({{ index }})</li>
+  <!-- indexをkeyに指定してはダメ -->
+  <p v-for="(value, key, index) of user" :key="value">{{ key }}: {{ value }}({{ index }})</p>
+  <p v-for="n in 10" :key="n">{{ n }}</p>
+  <!-- 1からスタート -->
+  <!-- v-forではinはofでもいい -->
 </template>
 <style>
 .red {
