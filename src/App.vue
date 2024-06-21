@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive, computed, watch, watchEffect } from 'vue'
+import { ref, reactive, computed, watch, watchEffect, onMounted } from 'vue'
 import CountUp from './components/CountUp.vue'
 import BaseButton from './components/BaseButton.vue'
 import ShowCount from './components/ShowCount.vue'
@@ -92,6 +92,14 @@ const user = ref({
 function onReset(num: number) {
   count.value = num
 }
+
+const hidden = ref(false)
+
+const userInput2 = ref(null)
+
+onMounted(() => {
+  userInput2.value.focus()
+})
 </script>
 
 <template>
@@ -164,6 +172,11 @@ function onReset(num: number) {
 
   <ResetButton @reset-count="count = $event" />
   <ResetButton @reset-count="onReset" />
+
+  <button @click="hidden = !hidden">hidden</button>
+  <CountUp v-if="!hidden" />
+
+  <input ref="userInput2" type="text" />
 </template>
 <style>
 .bg-beige {
