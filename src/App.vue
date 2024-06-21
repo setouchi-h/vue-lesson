@@ -3,6 +3,7 @@ import { ref, reactive, computed, watch, watchEffect } from 'vue'
 import CountUp from './components/CountUp.vue'
 import BaseButton from './components/BaseButton.vue'
 import ShowCount from './components/ShowCount.vue'
+import ResetButton from './components/ResetButton.vue'
 
 const title = ref('Vue.js Course')
 let price = ref(9.99)
@@ -87,6 +88,10 @@ const user = ref({
   age: 30,
   gender: 'male'
 })
+
+function onReset(num: number) {
+  count.value = num
+}
 </script>
 
 <template>
@@ -154,8 +159,11 @@ const user = ref({
   <BaseButton id="base-button" class="red bg-blue" @click="console.log('clicked')" />
   <!-- BaseButtonの外側のdivに反映される。idは親コンポーネントが優先 -->
 
-  <ShowCount :foo="count" />
+  <ShowCount :total-score="count" bar="HI" bool />
   <button @click="count++">count++</button>
+
+  <ResetButton @reset-count="count = $event" />
+  <ResetButton @reset-count="onReset" />
 </template>
 <style>
 .bg-beige {
