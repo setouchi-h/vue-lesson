@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { ref, reactive, computed, watch, watchEffect } from 'vue'
+import CountUp from './components/CountUp.vue'
+import BaseButton from './components/BaseButton.vue'
+import ShowCount from './components/ShowCount.vue'
 
 const title = ref('Vue.js Course')
 let price = ref(9.99)
@@ -142,8 +145,24 @@ const user = ref({
   <p v-for="n in 10" :key="n">{{ n }}</p>
   <!-- 1からスタート -->
   <!-- v-forではinはofでもいい -->
+
+  <CountUp />
+  <CountUp />
+  <CountUp id="count-up" class="red bg-blue" />
+  <BaseIcon />
+
+  <BaseButton id="base-button" class="red bg-blue" @click="console.log('clicked')" />
+  <!-- BaseButtonの外側のdivに反映される。idは親コンポーネントが優先 -->
+
+  <ShowCount :foo="count" />
+  <button @click="count++">count++</button>
 </template>
 <style>
+.bg-beige {
+  background-color: beige;
+}
+</style>
+<style scoped>
 .red {
   color: red;
 }
